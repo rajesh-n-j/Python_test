@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+</head>
+<body>
+    <div id="data">
+        <div>
+            <label>Start Line:</label>
+            <input type="text" id="start_line" name="start_line"><br><br>
+            <label>End Line:</label>
+            <input type="text" id="end_line" name="end_line"><br><br>
+        </div>
+        <label>Click on buttons to get file data:</label>
+        <button onclick="load_data('file1')">File 1</button>
+        <button onclick="load_data('file2')">File 2</button>
+        <button onclick="load_data('file3')">File 3</button>
+        <button onclick="load_data('file4')">File 4</button>
+        
+        {% if file_data != 'file not found' %}
+        <table>
+            <tr>
+            <th>Line No</th>
+            <th>Data</th>
+            </tr>
+            {% for value in file_data %}
+            <tr>
+            <td>{{value.line_no}}</td>
+            <td>{{value.line_data}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <table>
+            <tr>
+            <th>Line No</th>
+            <th>Data</th>
+            </tr>
+            <tr>
+                <td>Data not found</td>
+                <td>Data not found</td>
+                </tr>
+        </table>
+        {%endif%}
+    </div>
+      
+</body>
+<script src="{{ url_for('static', filename='file.js') }}"></script>
+</html>
